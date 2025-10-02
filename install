@@ -5,9 +5,9 @@ chmod +x /opt/fxcommander/fxcommander
 #cp -vr ./images /opt/fxcommander/images
 cp -v ./*.css /opt/fxcommander
 
-patchelf --set-rpath /opt/mlgui/lib /opt/fxcommander/fxcommander
 chmod 777 -R /opt/fxcommander
 
+rm -fv /usr/local/bin/fxcommander
 ln -s /opt/fxcommander/fxcommander /usr/local/bin/fxcommander
 
 echo "fxcommander installed."

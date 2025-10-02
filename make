@@ -57,7 +57,7 @@ elif cpp.release :
     cpp.addToLibs([
         "stdc++fs",
         "mlapi",
-        "mlgui",
+        "/opt/mlgui/lib/libmlgui.so",
         ])
 
 if("clean" in sys.argv or "clear" in sys.argv):
