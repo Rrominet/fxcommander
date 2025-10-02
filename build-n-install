@@ -12,7 +12,6 @@ chmod +x ./build-n-install
 cd ..
 rm -rf ./fxlauncher-backend
 
-cd ..
 git clone https://github.com/Rrominet/fxos_gui-lib
 cd fxos_gui-lib
 chmod +x ./build-n-install
