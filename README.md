@@ -1,9 +1,9 @@
 # FxCommander
 
-It's a really lightway and fast application launcher for linux.
+It's a really lightway and fast application launcher for linux.  
 The Bonus is that you can your custom commands really simply.
 
-[](https://motion-live.com/fxos/data/fxcommander-demo.mp4)
+![Demo](https://motion-live.com/fxos/data/fxcommander-demo.gif)
 
 ## Dependency Graph
 
@@ -45,7 +45,7 @@ Or just use any other system, that's not what missing :
 First time you open the app, you'll have no applciation to run. It's normal you need to Reload the Desktop application simply by Pressing `Ctrl` + `R`.  
 And you're good to go you can tyoe anything you want and press `Enter` to open your app.
 
-[](https://motion-live.com/fxos/data/fxcommander-reload.mp4)
+![Reload the apps](https://motion-live.com/fxos/data/fxcommander-reload.gif)
 
 ## Custom commands
 
