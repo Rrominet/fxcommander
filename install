@@ -3,7 +3,7 @@
 mkdir -p /opt/fxcommander
 cp -v ./fxcommander /opt/fxcommander/fxcommander
 chmod +x /opt/fxcommander/fxcommander
-cp -vr ./images /opt/fxcommander/images
+#cp -vr ./images /opt/fxcommander/images
 cp -v ./*.css /opt/fxcommander
 
 echo "fxcommander installed."
