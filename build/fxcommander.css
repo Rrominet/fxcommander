@@ -1,0 +1,15 @@
+.commander-container
+{
+    margin : 1em;
+}
+
+.command-window
+{
+    margin-top : 1em;
+    padding : 0 0.5em;
+}
+
+.commander-valid
+{
+    margin-top : 2em;
+}
