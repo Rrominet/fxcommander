@@ -4,6 +4,8 @@ if [[ $EUID -ne 0 ]]; then
    exit 1
 fi
 
+apt install -y patchelf
+
 cd ..
 git clone https://github.com/Rrominet/fxos_gui-lib
 cd fxos_gui-lib

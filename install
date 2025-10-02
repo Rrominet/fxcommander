@@ -1,9 +1,11 @@
 #!/bin/bash
-
 mkdir -p /opt/fxcommander
 cp -v ./fxcommander /opt/fxcommander/fxcommander
 chmod +x /opt/fxcommander/fxcommander
 #cp -vr ./images /opt/fxcommander/images
 cp -v ./*.css /opt/fxcommander
+
+patchelf --set-rpath /opt/mlgui/lib /opt/fxcommander/fxcommander
+chmod 777 -R /opt/fxcommander
 
 echo "fxcommander installed."
