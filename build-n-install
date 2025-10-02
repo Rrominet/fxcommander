@@ -7,13 +7,13 @@ fi
 cd ..
 git clone https://github.com/Rrominet/fxos_gui-lib
 cd fxos_gui-lib
-chmod +x /build-n-install
+chmod +x ./build-n-install
 ./build-n-install
 cd ..
-mkdir ./prjs
+mkdir -p ./prjs
 mv ./fxos_gui-lib ./prjs/mlgui.2
 cd ./fxcommander
-mkdir -p build
+mkdir -p ./build
 
 cd ./build
 chmod +x ../make
