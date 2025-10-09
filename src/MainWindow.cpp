@@ -6,6 +6,8 @@
 #include "commands/ProcessCommand.h"
 #include "mlgui.2/src/Scrollable.hpp"
 
+#include "fxhub/api/fxhub.h"
+
 MainWindow::MainWindow(ml::App* app) : ml::Window(app){}
 MainWindow::MainWindow(ml::App* app, ml::Window* parent) : ml::Window(app, parent){}
 MainWindow::~MainWindow(){}
@@ -43,6 +45,8 @@ void MainWindow::_setEvents()
             {
                 auto cmd = std::any_cast<ml::Command*>(_commander->events().data()); 
                 auto pcmd = static_cast<ml::ProcessCommand*>(cmd);
+                auto res = fxhub::send_event("fxcommander", "search-valid", pcmd->serialize(), false);
+                lg("Search valid event : " + res.dump(4));
                 if (cmd->userData().contains("removeMainWindow") && cmd->userData()["removeMainWindow"].get<bool>())
                 {
                     ml::app()->quit();

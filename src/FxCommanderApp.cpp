@@ -25,6 +25,9 @@ FxCommanderApp::FxCommanderApp(int argc,char *argv[]) : ml::App(argc,argv)
 {
     commander::_commander = this;	
     storage::init();
+    
+    _do_nothing = this->argv().has("do-nothing");
+
     this->createCommands();
     this->createWindows();
     this->setEvents();
@@ -111,6 +114,8 @@ void FxCommanderApp::createWindows()
 {
     this->createMainWindow<MainWindow>();
     _commanderW = (MainWindow*)_main;
+
+    _commanderW->commander()->setDoNothing(_do_nothing);
 
     _prefsW = this->createWindow<PrefsWindow>(_main).get();
     _prefsW->setStayHiddenFirstRun(true);

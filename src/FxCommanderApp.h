@@ -24,6 +24,7 @@ class FxCommanderApp : public ml::App
         PrefsWindow* _prefsW = nullptr; //bp cg
 
         Process* _fxlauncher = nullptr; //bp cg
+        bool _do_nothing = false;
 
     public : 
 #include "./FxCommanderApp_gen.h"
