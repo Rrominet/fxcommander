@@ -1,8 +1,9 @@
 #!/usr/bin/env bash
 mkdir -p /opt/fxcommander
 cp -v ./fxcommander /opt/fxcommander/fxcommander
+cp -v ./version /opt/fxcommander/version
+cp -v ./dependencies /opt/fxcommander/dependencies
 chmod +x /opt/fxcommander/fxcommander
-#cp -vr ./images /opt/fxcommander/images
 cp -v ./*.css /opt/fxcommander
 
 chmod 777 -R /opt/fxcommander
