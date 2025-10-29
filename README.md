@@ -22,11 +22,7 @@ cd ./fxcommander
 sudo chmod +x ./build-n-install
 sudo ./build-n-install
 ```
-
 Annnnd you're done !
-> [!WARNING]
-> For now the `build-n-install` script is bind to debian based distros (it uses `apt`) but I will port it soon on any others.
-> So Stay tuned for that :)
 
 ## Usage
 
