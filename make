@@ -45,6 +45,9 @@ cpp.addToSrcs(srcs)
 cpp.addToLibs(libs)
 cpp.definitions += defs
 cpp.addInstalledLibrary("gtkmm-4.0")
+# sudo apt install libwebkitgtk-6.0-dev
+cpp.addInstalledLibrary("webkitgtk-6.0")
+
 
 cpp.addToLibs("stdc++fs")
 if not cpp.release : 
