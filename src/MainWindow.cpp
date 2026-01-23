@@ -22,6 +22,7 @@ void MainWindow::init()
     _main->createLabel("Execute any command you want.");
     _commander = _main->createComposedWidget<ml::Commander>(&_main->content());
     _commander->addAllCommands(ml::app());
+    _commander->setCommandsScores(commander::get()->commandsScores());
 
     _setEvents();
 
@@ -45,8 +46,8 @@ void MainWindow::_setEvents()
             {
                 auto cmd = std::any_cast<ml::Command*>(_commander->events().data()); 
                 auto pcmd = static_cast<ml::ProcessCommand*>(cmd);
-                auto res = fxhub::send_event("fxcommander", "search-valid", pcmd->serialize(), false);
-                lg("Search valid event : " + res.dump(4));
+                fxhub::send_event("fxcommander", "search-valid", pcmd->serialize(), false);
+                commander::get()->increaseCommandScore(cmd, 1.0);
                 if (cmd->userData().contains("removeMainWindow") && cmd->userData()["removeMainWindow"].get<bool>())
                 {
                     ml::app()->quit();

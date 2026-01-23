@@ -12,3 +12,7 @@ Process* fxlauncher(){return _fxlauncher;}
 const Process* fxlauncher() const {return _fxlauncher;}
 
 
+json& commandsScores(){return _commandsScores;}
+const json& commandsScores() const {return _commandsScores;}
+
+

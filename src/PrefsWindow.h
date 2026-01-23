@@ -19,7 +19,7 @@ class PrefsWindow : public ml::Window
         virtual ~PrefsWindow() = default;
 
         json serialize();
-        void deserialize(const json& j);
+        void deserialize(const json& j) override;
 
         void read();
 
@@ -28,7 +28,7 @@ class PrefsWindow : public ml::Window
 
         void _setEvents();
 
-        // saave all the prefs in storage
+        // save all the prefs in storage
         void _onPropChange();
 
     public : 

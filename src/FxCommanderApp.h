@@ -19,12 +19,16 @@ class FxCommanderApp : public ml::App
         void onReloadDesktops();
         bool commandExists(const std::string& id);
 
+        void increaseCommandScore(ml::Command* command, float toAdd);
+
     private : 
         MainWindow* _commanderW=nullptr; //bp cg
         PrefsWindow* _prefsW = nullptr; //bp cg
 
         Process* _fxlauncher = nullptr; //bp cg
         bool _do_nothing = false;
+
+        json _commandsScores; //bp cg
 
     public : 
 #include "./FxCommanderApp_gen.h"

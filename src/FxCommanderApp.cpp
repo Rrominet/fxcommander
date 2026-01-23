@@ -28,6 +28,10 @@ FxCommanderApp::FxCommanderApp(int argc,char *argv[]) : ml::App(argc,argv)
     
     _do_nothing = this->argv().has("do-nothing");
 
+    //this need to be read BEFORE creating the main window.
+    _commandsScores = json::object();
+    _commandsScores = storage::get<json>("commands-score");
+
     this->createCommands();
     this->createWindows();
     this->setEvents();
@@ -237,6 +241,17 @@ void FxCommanderApp::onReloadDesktops()
                 lg(r.dump(4));
                 this->queue([cb, r]{cb(r);});
             });
+}
+
+void FxCommanderApp::increaseCommandScore(ml::Command* command,float toAdd)
+{
+    lg("Increasing score of " << command->id() << " by " << toAdd);
+    if (this->_commandsScores.contains(command->id()))
+        this->_commandsScores[command->id()] = this->_commandsScores[command->id()].get<float>() + toAdd;
+    else
+        this->_commandsScores[command->id()] = toAdd;
+
+    storage::set_sync("commands-score", _commandsScores);
 }
 
 namespace commander
