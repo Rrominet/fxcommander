@@ -26,7 +26,7 @@ Annnnd you're done !
 
 ## Usage
 
-Once installed you can launch FxCommander by the command `fxcommander` (pointing to `/usr/lib/local/fxcommander`)
+Once installed you can launch FxCommander by the command `/usr/opt/fxcommander`.  
 
 Of course launching it like this is a bit dumb.  
 What you want to do is to linked this command `fxcommander` to a global shortcut on your desktop environment.

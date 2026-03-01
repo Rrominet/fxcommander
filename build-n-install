@@ -26,5 +26,5 @@ mkdir -p ./build
 cd ./build
 chmod +x ../make
 chmod +x ../install
-../make release libs="../../cpp-utils_dependencies" fm="../../cpp-utils" prjs="../../prjs"
+../make release keep-same libs="../../cpp-utils_dependencies" fm="../../cpp-utils" prjs="../../prjs"
 ../install
