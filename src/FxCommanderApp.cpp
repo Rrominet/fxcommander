@@ -42,7 +42,7 @@ FxCommanderApp::FxCommanderApp(int argc,char *argv[]) : ml::App(argc,argv)
         this->addCss("fxcommander.css");
     };
 
-    this->setTimeout(later, 16);
+    this->queue(later);
 }
 
 void FxCommanderApp::setEvents()
