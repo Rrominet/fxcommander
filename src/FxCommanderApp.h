@@ -2,7 +2,6 @@
 #include "mlgui.2/src/App.h"
 #include "mlprocess.h"
 
-
 class MainWindow;
 class PrefsWindow;
 class FxCommanderApp : public ml::App
@@ -20,6 +19,11 @@ class FxCommanderApp : public ml::App
         bool commandExists(const std::string& id);
 
         void increaseCommandScore(ml::Command* command, float toAdd);
+        void setProgramExt(ml::Command* command, const std::string& ext);
+
+        //return true if there is a ext mapped.
+        bool openFileIfExtMapped();
+        void exec(const std::string& program, const std::string& file);
 
     private : 
         MainWindow* _commanderW=nullptr; //bp cg
@@ -29,6 +33,14 @@ class FxCommanderApp : public ml::App
         bool _do_nothing = false;
 
         json _commandsScores; //bp cg
+
+        // setted via argv (first one).
+        // if empty, default behavior
+        std::string _fileToOpen; //bp cg
+        json _programExtMap;
+
+        json _commandsData;
+        bool _changeSoftware = false; //bp cg
 
     public : 
 #include "./FxCommanderApp_gen.h"

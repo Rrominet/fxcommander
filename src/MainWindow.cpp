@@ -23,6 +23,13 @@ void MainWindow::init()
     _commander = _main->createComposedWidget<ml::Commander>(&_main->content());
     _commander->addAllCommands(ml::app());
     _commander->setCommandsScores(commander::get()->commandsScores());
+    
+    if (!commander::get()->fileToOpen().empty())
+    {
+        _commander->addArgument(commander::get()->fileToOpen());
+        lg("Argument 1 of fileToOpen : " << commander::get()->fileToOpen());
+        lg("Argument 1 of _commander : " << _commander->arguments()[0]);
+    }
 
     _setEvents();
 
@@ -48,6 +55,7 @@ void MainWindow::_setEvents()
                 auto pcmd = static_cast<ml::ProcessCommand*>(cmd);
                 fxhub::send_event("fxcommander", "search-valid", pcmd->serialize(), false);
                 commander::get()->increaseCommandScore(cmd, 1.0);
+                commander::get()->setProgramExt(cmd, files::ext(commander::get()->fileToOpen()));
                 if (cmd->userData().contains("removeMainWindow") && cmd->userData()["removeMainWindow"].get<bool>())
                 {
                     ml::app()->quit();

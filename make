@@ -7,9 +7,9 @@ import os
 import sys
 sys.path.append("../")
 
-fm = "/media/romain/Donnees/Programmation/cpp/frameworks"
-libs = "/media/romain/Donnees/Programmation/cpp/libs"
-prjs = "/media/romain/Donnees/Programmation/cpp/cmake"
+fm = "../../../frameworks"
+libs = "../../../libs"
+prjs = "../.."
 
 for arg in sys.argv:
     if "libs=" in arg:
@@ -48,19 +48,15 @@ cpp.addInstalledLibrary("gtkmm-4.0")
 # sudo apt install libwebkitgtk-6.0-dev
 cpp.addInstalledLibrary("webkitgtk-6.0")
 
-
 cpp.addToLibs("stdc++fs")
-if not cpp.release : 
-    cpp.addToLibs([
-        fm + "/build/libmlapi.so",
-        prjs + "/mlgui.2/build/libmlgui.so",
-        ])
+cpp.addToLibs("boost_filesystem")
 
-elif cpp.release : 
-    cpp.addProject([
-        "/opt/mlapi/lib",
-        "/opt/mlgui/lib",
-        ])
+if "release" in sys.argv:
+    cpp.addToLibs(fm + "/build/libmlapi.a")
+    cpp.addToLibs(prjs + "/mlgui.2/build/libmlgui.a")
+else : 
+    cpp.addToLibs(fm + "/build/libmlapi_debug.a")
+    cpp.addToLibs(prjs + "/mlgui.2/build/libmlgui_debug.a")
 
 if("clean" in sys.argv or "clear" in sys.argv):
     cpp.clean()

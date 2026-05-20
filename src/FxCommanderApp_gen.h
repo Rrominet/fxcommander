@@ -16,3 +16,11 @@ json& commandsScores(){return _commandsScores;}
 const json& commandsScores() const {return _commandsScores;}
 
 
+std::string fileToOpen(){return _fileToOpen;}
+const std::string& fileToOpen() const {return _fileToOpen;}
+
+
+bool changeSoftware(){return _changeSoftware;}
+const bool changeSoftware() const {return _changeSoftware;}
+
+
