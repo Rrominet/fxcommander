@@ -68,33 +68,85 @@ FxCommanderApp::FxCommanderApp(int argc,char *argv[]) : ml::App(argc,argv)
 bool FxCommanderApp::openFileIfExtMapped()
 {
     if (_fileToOpen.empty())	
+    {
+        lg("File to open is empty so we run normally without opening anything.");
         return false;
+    }
     if (_changeSoftware)
+    {
+        lg("The Change software option is activated so we still run the gui to save the new default software associated with this file extension.");
         return false;
+    }
 
     auto ext = files::ext(_fileToOpen);
     std::string programId;
     for (auto item : _programExtMap.items())
     {
-        if (item.value() == ext)
+        if (item.value().is_array())
         {
-            programId = item.key();
-            break;
+            for (auto jsonext : item.value())
+            {
+                if (jsonext == ext)
+                {
+                    programId = item.key();
+                    break;
+                }
+            }
+        }
+        else 
+        {
+            if (item.value() == ext)
+            {
+                programId = item.key();
+                break;
+            }
         }
     }
 
     if (programId.empty())
+    {
+        lg("No program id found for this file extension : " << ext);
         return false;
+    }
 
     try
     {
-        std::string program = _commandsData["commands"][programId]["processPath"];
+        std::string program;
+        if(!_commandsData.contains("commands"))
+        {
+            lg("No commands data found in the commands.json file -- wierd.");
+            return false;
+        }
+
+        for (auto item : _commandsData["commands"].items())
+        {
+            if (item.value().contains("id") && item.value()["id"] == programId)
+            {
+                if (item.value().contains("processPath"))
+                    program = item.value()["processPath"];
+                break;
+            }
+        }
+
+        if (program.empty())
+        {
+            if (_commandsData["commands"].contains(programId) && _commandsData["commands"][programId].contains("processPath"))
+                program = _commandsData["commands"][programId]["processPath"];
+
+        }
+        if (program.empty())
+        {
+            lg("Couldn't get the program path from its id : " << programId);
+            return false;
+        }
+
         this->exec(program, _fileToOpen);
         return true;
     }
     catch(const std::exception& e)
     {
-        lg("Couldn't get the program path from its id.");
+        lg("Error in execution of " << programId << " for file " << _fileToOpen);
+        lg("Couldn't get the program path from its id : " << programId);
         lg(e.what());
         return false;
     }
@@ -322,7 +374,23 @@ void FxCommanderApp::increaseCommandScore(ml::Command* command,float toAdd)
 
 void FxCommanderApp::setProgramExt(ml::Command* command,const std::string& ext)
 {
-    _programExtMap[command->id()] = ext;	
+    lg("Setting program ext of " << command->id() << " to " << ext);
+    if (_programExtMap.contains(command->id()))
+    {
+        if (_programExtMap[command->id()].is_string())
+        {
+            auto old = _programExtMap[command->id()].get<std::string>();
+            _programExtMap[command->id()] = json::array();
+            _programExtMap[command->id()].push_back(old);
+        }
+        if (!_programExtMap[command->id()].contains(ext))
+            _programExtMap[command->id()].push_back(ext);
+    }
+    else 
+    {
+        _programExtMap[command->id()] = json::array();
+        _programExtMap[command->id()].push_back(ext);
+    }
     storage::set_sync("program-ext-map", _programExtMap);
 }
 
