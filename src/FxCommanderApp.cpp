@@ -79,6 +79,8 @@ bool FxCommanderApp::openFileIfExtMapped()
     }
 
     auto ext = files::ext(_fileToOpen);
+    if (ext.empty())
+        return false;
     std::string programId;
     for (auto item : _programExtMap.items())
     {
